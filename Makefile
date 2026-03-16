@@ -2,7 +2,7 @@
 CC = gcc
 
 # 编译参数
-CFLAGS = -Wall -g -Iinclude
+CFLAGS = -Wall -g -Iinclude     # -Wall：打开编译警告    # -g:生成调试信息    # Iinclude：指定头文件目录，可以除了在本文件目录下额外搜索其他目录
 
 # 目录
 SRC_DIR = src
@@ -13,7 +13,7 @@ BIN_DIR = bin
 SRCS = $(wildcard $(SRC_DIR)/*.c)
 
 # 生成对应的.o文件
-OBJS = $(patsubst $(SRC_DIR)/%.c,$(BUILD_DIR)/%.o,$(SRCS))
+OBJS = $(patsubst $(SRC_DIR)/%.c,$(BUILD_DIR)/%.o,$(SRCS))     # 把一组 .c 文件路径转换成对应的 .o 文件路径
 
 # 最终程序
 TARGET = $(BIN_DIR)/app.exe
@@ -22,11 +22,11 @@ TARGET = $(BIN_DIR)/app.exe
 all: $(TARGET)
 
 # 链接
-$(TARGET): $(OBJS) | $(BIN_DIR)
+$(TARGET): $(OBJS)
 	$(CC) $(OBJS) -o $(TARGET)
 
 # 编译规则
-$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c | $(BUILD_DIR)
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 # 创建目录
